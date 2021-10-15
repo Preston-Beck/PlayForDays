@@ -1,0 +1,53 @@
+﻿@model IEnumerable<PlayForDays.Models.Sport>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SportName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumOfPlayers)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumOfTeams)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Equipment)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SportName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumOfPlayers)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumOfTeams)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Equipment)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.SportId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.SportId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.SportId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
