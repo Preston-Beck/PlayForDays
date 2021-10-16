@@ -19,7 +19,9 @@ namespace PlayForDays.Models
         public int SkillLevel { get; set; }
         [Range(20,84)]
         public double HeightInInches { get; set; }
-        //Parent Reference
+        //FK
         public int SportingEventId { get; set; }
+        //Parent Reference
+        public SportingEvent SportingEvent { get; set; }
     }
 }

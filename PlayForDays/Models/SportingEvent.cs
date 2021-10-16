@@ -19,8 +19,11 @@ namespace PlayForDays.Models
         [Required]
         [MaxLength(2)]
         public string Province { get; set; }
-        //Parent Reference
+        //FK
         public int SportId { get; set; }
+
+        //Parent Reference
+        public Sport Sport { get; set; }
         //Child Reference
         public List<Player> Players { get; set; }
     }
