@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace PlayForDays.Models
 {
+    //The Sport class is a Parent of the SportingEvent class.
+    //A Sport object can be created with the attributes of:
+    //Name, Number of Players, Number of Teams and Equipment
     public class Sport
     {
         public int SportId { get; set; }

@@ -5,7 +5,8 @@
 }
 
 <h1>Sports</h1>
-
+<!-- The Sports view allows users to see the current Sports in the database. The table can be sorted using the sorttable.js file.
+    Each record allows for CRUD functionality. -->
 <p>
     <a asp-action="Create">Create New Sport</a>
 </p>
@@ -28,26 +29,27 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.SportName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumOfPlayers)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumOfTeams)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Equipment)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.SportId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.SportId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.SportId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SportName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumOfPlayers)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumOfTeams)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Equipment)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.SportId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.SportId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.SportId">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

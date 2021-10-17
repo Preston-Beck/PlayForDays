@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace PlayForDays.Models
 {
+    //The SportingEvent class is a child of the Sport class.
+    //And a Parent of the Player class.
+    //A SportingEvent object can be created with the attributes of:
+    //Name, Start Time, End Time, Address, City, Province, and a corresponding Sport.
     public class SportingEvent
     {
         //PK

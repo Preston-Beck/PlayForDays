@@ -16,6 +16,7 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+                <!-- The shared Layout file provides site wide links to the different views (Home, Sports, Players, Sporting Events -->
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
@@ -25,10 +26,10 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Sports" asp-action="Index">Sports</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Players" asp-action="Index">Players</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="SportingEvents" asp-action="Index">Sporting Events</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="SportingEvents" asp-action="Index">Sporting Events</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Players" asp-action="Index">Players</a>
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />

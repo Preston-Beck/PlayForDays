@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace PlayForDays.Models
 {
+    //The Player class is a child of the SportingEvent class.
+    //A Player object can be created with the simple attributes of:
+    //First Name, Last Name, Skill Level, Height, and a corresponding event
     public class Player
     {
         public int PlayerId { get; set; }
