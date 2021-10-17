@@ -10,11 +10,14 @@ namespace PlayForDays.Models
     {
         public int SportId { get; set; }
         [Required]
+        [Display(Name = "Sport Name")]
         public string SportName { get; set; }
         [Range(2,100)]
-        public int NumberOfPlayers { get; set; }
+        [Display(Name = "Number of Players")]
+        public int NumOfPlayers { get; set; }
         [Range(0,50)]
-        public int NumberOfTeams { get; set; }
+        [Display(Name = "Number of Teams")]
+        public int NumOfTeams { get; set; }
         public string Equipment { get; set; }
         //Child Reference
         public List<SportingEvent> SportingEvents { get; set; }

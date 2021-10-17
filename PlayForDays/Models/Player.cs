@@ -11,13 +11,17 @@ namespace PlayForDays.Models
         public int PlayerId { get; set; }
         [Required]
         [MaxLength(40)]
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
         [Required]
         [MaxLength(40)]
+        [Display(Name = "Last Name")]
         public string LastName { get; set; }
         [Range(1,10)]
+        [Display(Name = "Skill Level")]
         public int SkillLevel { get; set; }
         [Range(20,84)]
+        [Display(Name = "Height (in Inches)")]
         public double HeightInInches { get; set; }
         //FK
         public int SportingEventId { get; set; }

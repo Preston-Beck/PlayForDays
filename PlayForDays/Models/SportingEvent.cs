@@ -10,7 +10,9 @@ namespace PlayForDays.Models
     {
         //PK
         public int SportingEventId { get; set; }
+        [Display(Name = "Start Time")]
         public DateTime StartTime { get; set; }
+        [Display(Name = "End Time")]
         public DateTime EndTime { get; set; }
         [Required]
         public string Address { get; set; }
