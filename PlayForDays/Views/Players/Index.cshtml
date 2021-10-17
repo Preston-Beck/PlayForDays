@@ -7,23 +7,26 @@
 <h1>Players</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Create New Player</a>
 </p>
 <table class="table sortable">
     <thead>
         <tr>
             <th>
-                <a href="#">First Name</a>
-            </th>
+                <a href="#">@Html.DisplayNameFor(model => model.FirstName)</a>
+</th>
             <th>
-                <a href="#">Last Name</a>
-            </th>
+                <a href="#">@Html.DisplayNameFor(model => model.LastName)</a>
+</th>
             <th>
-                <a href="#">Skill Level</a>
-            </th>
+                <a href="#">@Html.DisplayNameFor(model => model.SkillLevel)</a>
+</th>
             <th>
-                <a href="#">Height (in Inches)</a>
-            </th>
+                <a href="#">@Html.DisplayNameFor(model => model.HeightInInches)</a>
+</th>
+            <th>
+                <a href="#">@Html.DisplayNameFor(model => model.SportingEvent)</a>
+</th>
             <th></th>
         </tr>
     </thead>
@@ -41,6 +44,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.HeightInInches)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SportingEvent.Name)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.PlayerId">Edit</a> |

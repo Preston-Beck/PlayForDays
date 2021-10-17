@@ -7,25 +7,31 @@
 <h1>Sporting Events</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Create New Sporting Event</a>
 </p>
 <table class="table sortable">
     <thead>
         <tr>
             <th>
-                <a href="#">Start Time</a>
+                <a href="#">@Html.DisplayNameFor(model => model.Name)</a>
             </th>
             <th>
-                <a href="#">End Time</a>
+                <a href="#">@Html.DisplayNameFor(model => model.StartTime)</a>
             </th>
             <th>
-                <a href="#">Address</a>
+                <a href="#">@Html.DisplayNameFor(model => model.EndTime)</a>
             </th>
             <th>
-                <a href="#">City</a>
+                <a href="#">@Html.DisplayNameFor(model => model.Address)</a>
             </th>
             <th>
-                <a href="#">Province</a>
+                <a href="#">@Html.DisplayNameFor(model => model.City)</a>
+            </th>
+            <th>
+                <a href="#">@Html.DisplayNameFor(model => model.Province)</a>
+            </th>
+            <th>
+                <a href="#">@Html.DisplayNameFor(model => model.Sport)</a>
             </th>
             <th></th>
         </tr>
@@ -33,6 +39,9 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.StartTime)
             </td>
@@ -47,6 +56,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Province)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sport.SportName)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.SportingEventId">Edit</a> |

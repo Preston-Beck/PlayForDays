@@ -7,22 +7,22 @@
 <h1>Sports</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Create New Sport</a>
 </p>
 <table class="table sortable">
     <thead>
         <tr>
             <th>
-                <a href="#">Sport Name</a>
+                <a href="#">@Html.DisplayNameFor(model => model.SportName)</a>
             </th>
             <th>
-                <a href="#">Number of Players</a>
+                <a href="#">@Html.DisplayNameFor(model => model.NumOfPlayers)</a>
             </th>
             <th>
-                <a href="#">Number of Teams</a>
+                <a href="#">@Html.DisplayNameFor(model => model.NumOfTeams)</a>
             </th>
             <th>
-                <a href="#">Equipment</a>
+                <a href="#">@Html.DisplayNameFor(model => model.Equipment)</a>
             </th>
             <th></th>
         </tr>

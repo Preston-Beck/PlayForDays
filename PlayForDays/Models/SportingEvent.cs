@@ -10,6 +10,8 @@ namespace PlayForDays.Models
     {
         //PK
         public int SportingEventId { get; set; }
+        [Required]
+        public string Name { get; set; }
         [Display(Name = "Start Time")]
         public DateTime StartTime { get; set; }
         [Display(Name = "End Time")]
@@ -22,6 +24,7 @@ namespace PlayForDays.Models
         [MaxLength(2)]
         public string Province { get; set; }
         //FK
+        [Display(Name = "Sport")]
         public int SportId { get; set; }
 
         //Parent Reference

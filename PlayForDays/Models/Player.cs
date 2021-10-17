@@ -24,8 +24,10 @@ namespace PlayForDays.Models
         [Display(Name = "Height (in Inches)")]
         public double HeightInInches { get; set; }
         //FK
+        [Display(Name = "Sporting Event")]
         public int SportingEventId { get; set; }
         //Parent Reference
+        [Display(Name = "Sporting Event")]
         public SportingEvent SportingEvent { get; set; }
     }
 }

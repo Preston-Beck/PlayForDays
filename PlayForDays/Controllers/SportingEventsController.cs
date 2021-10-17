@@ -22,7 +22,8 @@ namespace PlayForDays.Controllers
         // GET: SportingEvents
         public async Task<IActionResult> Index()
         {
-            return View(await _context.SportingEvents.ToListAsync());
+            var applicationDbContext = _context.SportingEvents.Include(s => s.Sport);
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: SportingEvents/Details/5
@@ -34,6 +35,7 @@ namespace PlayForDays.Controllers
             }
 
             var sportingEvent = await _context.SportingEvents
+                .Include(s => s.Sport)
                 .FirstOrDefaultAsync(m => m.SportingEventId == id);
             if (sportingEvent == null)
             {
@@ -46,6 +48,7 @@ namespace PlayForDays.Controllers
         // GET: SportingEvents/Create
         public IActionResult Create()
         {
+            ViewData["SportId"] = new SelectList(_context.Sports, "SportId", "SportName");
             return View();
         }
 
@@ -54,7 +57,7 @@ namespace PlayForDays.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("SportingEventId,StartTime,EndTime,Address,City,Province,SportId")] SportingEvent sportingEvent)
+        public async Task<IActionResult> Create([Bind("SportingEventId,Name,StartTime,EndTime,Address,City,Province,SportId")] SportingEvent sportingEvent)
         {
             if (ModelState.IsValid)
             {
@@ -62,6 +65,7 @@ namespace PlayForDays.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["SportId"] = new SelectList(_context.Sports, "SportId", "SportName", sportingEvent.SportId);
             return View(sportingEvent);
         }
 
@@ -78,6 +82,7 @@ namespace PlayForDays.Controllers
             {
                 return NotFound();
             }
+            ViewData["SportId"] = new SelectList(_context.Sports, "SportId", "SportName", sportingEvent.SportId);
             return View(sportingEvent);
         }
 
@@ -86,7 +91,7 @@ namespace PlayForDays.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("SportingEventId,StartTime,EndTime,Address,City,Province,SportId")] SportingEvent sportingEvent)
+        public async Task<IActionResult> Edit(int id, [Bind("SportingEventId,Name,StartTime,EndTime,Address,City,Province,SportId")] SportingEvent sportingEvent)
         {
             if (id != sportingEvent.SportingEventId)
             {
@@ -113,6 +118,7 @@ namespace PlayForDays.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["SportId"] = new SelectList(_context.Sports, "SportId", "SportName", sportingEvent.SportId);
             return View(sportingEvent);
         }
 
@@ -125,6 +131,7 @@ namespace PlayForDays.Controllers
             }
 
             var sportingEvent = await _context.SportingEvents
+                .Include(s => s.Sport)
                 .FirstOrDefaultAsync(m => m.SportingEventId == id);
             if (sportingEvent == null)
             {

@@ -22,7 +22,8 @@ namespace PlayForDays.Controllers
         // GET: Players
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Players.ToListAsync());
+            var applicationDbContext = _context.Players.Include(p => p.SportingEvent);
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Players/Details/5
@@ -34,6 +35,7 @@ namespace PlayForDays.Controllers
             }
 
             var player = await _context.Players
+                .Include(p => p.SportingEvent)
                 .FirstOrDefaultAsync(m => m.PlayerId == id);
             if (player == null)
             {
@@ -46,6 +48,7 @@ namespace PlayForDays.Controllers
         // GET: Players/Create
         public IActionResult Create()
         {
+            ViewData["SportingEventId"] = new SelectList(_context.SportingEvents, "SportingEventId", "Name");
             return View();
         }
 
@@ -62,6 +65,7 @@ namespace PlayForDays.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["SportingEventId"] = new SelectList(_context.SportingEvents, "SportingEventId", "Name", player.SportingEventId);
             return View(player);
         }
 
@@ -78,6 +82,7 @@ namespace PlayForDays.Controllers
             {
                 return NotFound();
             }
+            ViewData["SportingEventId"] = new SelectList(_context.SportingEvents, "SportingEventId", "Name", player.SportingEventId);
             return View(player);
         }
 
@@ -113,6 +118,7 @@ namespace PlayForDays.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["SportingEventId"] = new SelectList(_context.SportingEvents, "SportingEventId", "Name", player.SportingEventId);
             return View(player);
         }
 
@@ -125,6 +131,7 @@ namespace PlayForDays.Controllers
             }
 
             var player = await _context.Players
+                .Include(p => p.SportingEvent)
                 .FirstOrDefaultAsync(m => m.PlayerId == id);
             if (player == null)
             {
