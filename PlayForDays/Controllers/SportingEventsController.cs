@@ -11,7 +11,7 @@ using PlayForDays.Models;
 
 namespace PlayForDays.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Administrator")]
     public class SportingEventsController : Controller
     {
         private readonly ApplicationDbContext _context;
