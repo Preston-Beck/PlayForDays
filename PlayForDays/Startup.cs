@@ -36,6 +36,17 @@ namespace PlayForDays
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
+
+            //Enabling Google Authentication
+            services.AddAuthentication()
+                .AddGoogle(options =>
+                {
+                    //reference google authentication section from appsettings.json)
+                    IConfigurationSection googleAuth = Configuration.GetSection("Authentication:Google");
+
+                    options.ClientId = googleAuth["ClientId"];
+                    options.ClientSecret = googleAuth["ClientSecret"];
+                });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
