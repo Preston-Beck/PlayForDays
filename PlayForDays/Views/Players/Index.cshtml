@@ -5,56 +5,65 @@
 }
 
 <h1>Players</h1>
-<!-- The players view allows users to see the current players in the database. The table can be sorted using the sorttable.js file. 
+<!-- The players view allows users to see the current players in the database. The table can be sorted using the sorttable.js file.
     Each record allows for CRUD functionality. -->
-<p>
-    <a asp-action="Create">Create New Player</a>
-</p>
+<!-- Hide the create new button unless an admin -->
+@if (User.IsInRole("Administrator"))
+{
+    <p>
+        <a asp-action="Create">Create New Player</a>
+    </p>
+}
 <table class="table sortable">
     <thead>
         <tr>
             <th>
                 <a href="#">@Html.DisplayNameFor(model => model.FirstName)</a>
-</th>
+            </th>
             <th>
                 <a href="#">@Html.DisplayNameFor(model => model.LastName)</a>
-</th>
+            </th>
             <th>
                 <a href="#">@Html.DisplayNameFor(model => model.SkillLevel)</a>
-</th>
+            </th>
             <th>
                 <a href="#">@Html.DisplayNameFor(model => model.HeightInInches)</a>
-</th>
+            </th>
             <th>
                 <a href="#">@Html.DisplayNameFor(model => model.SportingEvent)</a>
-</th>
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SkillLevel)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HeightInInches)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SportingEvent.Name)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.PlayerId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.PlayerId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.PlayerId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SkillLevel)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HeightInInches)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SportingEvent.Name)
+                </td>
+                <td>
+                    <!-- Always display details link but only display edit and delete for admins -->
+                    <a asp-action="Details" asp-route-id="@item.PlayerId">Details</a><br />
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.PlayerId">Edit</a><br />
+                        <a asp-action="Delete" asp-route-id="@item.PlayerId">Delete</a>
+                    }
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

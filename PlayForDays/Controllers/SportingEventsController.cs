@@ -11,6 +11,7 @@ using PlayForDays.Models;
 
 namespace PlayForDays.Controllers
 {
+    //Private controller for admins only
     [Authorize(Roles = "Administrator")]
     public class SportingEventsController : Controller
     {
@@ -21,13 +22,16 @@ namespace PlayForDays.Controllers
             _context = context;
         }
 
+        //Make the index view available to everyone
         // GET: SportingEvents
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.SportingEvents.Include(s => s.Sport);
             return View(await applicationDbContext.ToListAsync());
         }
 
+        //Make the details view public
         // GET: SportingEvents/Details/5
         [AllowAnonymous]
         public async Task<IActionResult> Details(int? id)

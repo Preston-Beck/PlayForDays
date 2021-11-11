@@ -7,9 +7,13 @@
 <h1>Sports</h1>
 <!-- The Sports view allows users to see the current Sports in the database. The table can be sorted using the sorttable.js file.
     Each record allows for CRUD functionality. -->
-<p>
-    <a asp-action="Create">Create New Sport</a>
-</p>
+<!-- Hide the create new button unless an admin -->
+@if (User.IsInRole("Administrator"))
+{
+    <p>
+        <a asp-action="Create">Create New Sport</a>
+    </p>
+}
 <table class="table sortable">
     <thead>
         <tr>
@@ -45,9 +49,13 @@
                     @Html.DisplayFor(modelItem => item.Equipment)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.SportId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.SportId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.SportId">Delete</a>
+                    <!-- Always display details link but only display edit and delete for admins -->
+                    <a asp-action="Details" asp-route-id="@item.SportId">Details</a><br />
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.SportId">Edit</a><br />
+                        <a asp-action="Delete" asp-route-id="@item.SportId">Delete</a>
+                    }
                 </td>
             </tr>
         }
