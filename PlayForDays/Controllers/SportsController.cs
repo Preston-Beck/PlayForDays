@@ -27,7 +27,7 @@ namespace PlayForDays.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Sports.ToListAsync());
+            return View("Index", await _context.Sports.ToListAsync());
         }
 
         //Make the details view public
