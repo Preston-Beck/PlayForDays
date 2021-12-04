@@ -24,26 +24,63 @@ namespace PlayForDaysTests
             _context = new ApplicationDbContext(options);
 
             //Create mock data for the controller
+            List<Sport> sports = new List<Sport>();
             List<Player> players = new List<Player>();
+            List<SportingEvent> sportingEvents = new List<SportingEvent>();
+            var sport1 = new Sport();
 
             //var SportingEvent = new List<SportingEvent>();
-            var SportingEvent = new SportingEvent(
+            var sportingEvent = new SportingEvent
+            {
                 SportingEventId = 100,
                 Name = "Test Sporting Event",
-                StartTime = 01 / 01 / 2021,
-                EndTime = 01 / 02 / 2021,
+                StartTime = new DateTime(),
+                EndTime = new DateTime(0001, 01, 02),
                 Address = "1 Test Dr",
                 City = "Test City",
                 Province = "TP",
                 SportId = 2,
-                Sport = "Hockey",
-                Players = players));
+                Sport = sport1,
+                Players = players
+            };
 
-            var Sport = new Sport();
+            sportingEvents.Add(sportingEvent);
 
+            sports.Add(new Sport
+            {
+                SportId = 1,
+                SportName = "Hockey",
+                NumOfPlayers = 10,
+                NumOfTeams = 2,
+                Equipment = "test equipment",
+                SportingEvents = sportingEvents
+            });
 
+            sports.Add(new Sport
+            {
+                SportId = 2,
+                SportName = "Badminton",
+                NumOfPlayers = 2,
+                NumOfTeams = 2,
+                Equipment = "test equipment",
+                SportingEvents = sportingEvents
+            });
 
+            sports.Add(new Sport
+            {
+                SportId = 3,
+                SportName = "Ultimate",
+                NumOfPlayers = 14,
+                NumOfTeams = 2,
+                Equipment = "test equipment",
+                SportingEvents = sportingEvents
+            });
 
+            foreach(var sport in sports)
+            {
+                _context.Sports.Add(sport);
+            }
+            _context.SaveChanges();
 
             //Arrange: Create a controller object for all tests
             controller = new SportsController(_context);
