@@ -37,23 +37,23 @@ namespace PlayForDays.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return View("404");
             }
 
             var sport = await _context.Sports
                 .FirstOrDefaultAsync(m => m.SportId == id);
             if (sport == null)
             {
-                return NotFound();
+                return View("404");
             }
 
-            return View(sport);
+            return View("Details", sport);
         }
 
         // GET: Sports/Create
         public IActionResult Create()
         {
-            return View();
+            return View("Create");
         }
 
         // POST: Sports/Create
@@ -69,7 +69,7 @@ namespace PlayForDays.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(sport);
+            return View("Create", sport);
         }
 
         // GET: Sports/Edit/5
@@ -77,15 +77,15 @@ namespace PlayForDays.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return View("404");
             }
 
             var sport = await _context.Sports.FindAsync(id);
             if (sport == null)
             {
-                return NotFound();
+                return View("404");
             }
-            return View(sport);
+            return View("Edit", sport);
         }
 
         // POST: Sports/Edit/5
@@ -97,7 +97,7 @@ namespace PlayForDays.Controllers
         {
             if (id != sport.SportId)
             {
-                return NotFound();
+                return View("404");
             }
 
             if (ModelState.IsValid)
@@ -111,7 +111,7 @@ namespace PlayForDays.Controllers
                 {
                     if (!SportExists(sport.SportId))
                     {
-                        return NotFound();
+                        return View("404");
                     }
                     else
                     {
@@ -120,7 +120,7 @@ namespace PlayForDays.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(sport);
+            return View("Edit", sport);
         }
 
         // GET: Sports/Delete/5
@@ -128,17 +128,17 @@ namespace PlayForDays.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return View("404");
             }
 
             var sport = await _context.Sports
                 .FirstOrDefaultAsync(m => m.SportId == id);
             if (sport == null)
             {
-                return NotFound();
+                return View("404");
             }
 
-            return View(sport);
+            return View("Delete", sport);
         }
 
         // POST: Sports/Delete/5
