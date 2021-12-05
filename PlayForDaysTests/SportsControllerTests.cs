@@ -6,6 +6,7 @@ using PlayForDays.Data;
 using PlayForDays.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PlayForDaysTests
 {
@@ -17,10 +18,10 @@ namespace PlayForDaysTests
         private List<Sport> sports = new List<Sport>();
         private List<Player> players = new List<Player>();
         private List<SportingEvent> sportingEvents = new List<SportingEvent>();
-        
 
-        //Sets up in memory database and new controller before every test
-        [TestInitialize]
+
+    //Sets up in memory database and new controller before every test
+    [TestInitialize]
         public void TestInitialize()
         {
             //Setup in memory database
@@ -51,7 +52,7 @@ namespace PlayForDaysTests
             {
                 SportId = 10,
                 SportName = "Hockey",
-                NumOfPlayers = 10,
+                NumOfPlayers = 12,
                 NumOfTeams = 2,
                 Equipment = "test equipment",
                 SportingEvents = sportingEvents
@@ -161,6 +162,44 @@ namespace PlayForDaysTests
 
             //Assert
             Assert.AreEqual("Create", result.ViewName);
+        }
+
+        [TestMethod]
+        public void CreatePostWithInvalidModelDataLoadsCreate()
+        {
+            controller.ModelState.AddModelError("Invalid Sport", "Name field is empty");
+
+            //Act
+            var result = (ViewResult)controller.Create(sports[0]).Result;
+
+            //Assert
+            Assert.AreEqual("Create", result.ViewName);
+        }
+
+        [TestMethod]
+        public void CreatePostWithDuplicateModelDataLoadsCreate()
+        {
+            //Act
+            var result = (ViewResult)controller.Create(sports[0]).Result;
+
+            //Assert
+            Assert.ThrowsException<AggregateException>(() => result.Model);
+        }
+
+        [TestMethod]
+        public void CreatePostValidDataSavesToDatabase()
+        {
+            Sport sport = new Sport {
+                SportId = 16,
+                SportName = "Soccer",
+                NumOfPlayers = 22,
+                NumOfTeams = 2,
+                Equipment = "test equipment",
+                SportingEvents = sportingEvents
+            };
+            _context.Sports.Add(sport);
+            _context.SaveChanges();
+            Assert.AreEqual(sport, _context.Sports.ToArray()[3]);
         }
 
 
