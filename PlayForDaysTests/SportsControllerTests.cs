@@ -133,7 +133,7 @@ namespace PlayForDaysTests
         }
 
         [TestMethod]
-        public void DetailsWithValidIdDetails()
+        public void DetailsWithValidIdLoadsDetails()
         {
             //Act
             var result = (ViewResult)controller.Details(2).Result;
@@ -154,6 +154,7 @@ namespace PlayForDaysTests
         }
         #endregion
 
+        #region Create
         [TestMethod]
         public void CreateViewLoadsCorrectView()
         {
@@ -189,6 +190,7 @@ namespace PlayForDaysTests
         [TestMethod]
         public void CreatePostValidDataSavesToDatabase()
         {
+            //Arrange: Set up a new sport to be "created"
             Sport sport = new Sport {
                 SportId = 16,
                 SportName = "Soccer",
@@ -197,11 +199,58 @@ namespace PlayForDaysTests
                 Equipment = "test equipment",
                 SportingEvents = sportingEvents
             };
+
+            //Act: Add the sport to the database and save
             _context.Sports.Add(sport);
             _context.SaveChanges();
+
+            //Assert
             Assert.AreEqual(sport, _context.Sports.ToArray()[3]);
         }
+        #endregion
 
+        #region Edit
+        [TestMethod]
+        public void EditWithNoIdLoads404()
+        {
+            //Act
+            var result = (ViewResult)controller.Edit(null).Result;
+
+            //Assert
+            Assert.AreEqual("404", result.ViewName);
+        }
+
+        [TestMethod]
+        public void EditWithValidIdLoadsEdit()
+        {
+            //Act
+            var result = (ViewResult)controller.Edit(2).Result;
+
+            //Assert
+            Assert.AreEqual("Edit", result.ViewName);
+        }
+
+        [TestMethod]
+        public void EditWithInvalidIdLoads404()
+        {
+            //Act
+            var result = (ViewResult)controller.Edit(1000).Result;
+
+            //Assert
+            Assert.AreEqual("404", result.ViewName);
+        }
+
+        [TestMethod]
+        public void EditWithValidIdLoadsModel()
+        {
+            //Act
+            var result = (ViewResult)controller.Edit(2).Result;
+
+            //Assert
+            Sport model = (Sport)result.Model;
+            Assert.AreEqual(_context.Sports.Find(2), model);
+        }
+        #endregion
 
     }
 }
